@@ -8,7 +8,7 @@ https://developer.mozilla.org/en-US/docs/Glossary/CORS
 
 https://en.wikipedia.org/wiki/Cross-origin_resource_sharing
 
-monitored sites will be open in separate window.
+monitored sites will be open in separate tiled window.
 
 If monitored site is not use Cross origin policy, you can use iframe <a href=https://github.com/e-x/MicroMonitoring>version</a> !
 
