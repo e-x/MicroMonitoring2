@@ -30,7 +30,7 @@ If monitored site is not use Cross origin policy, you can use iframe <a href=htt
 	name – имя урла (не используется, только для удобства)
 	url - урл мониторимой системы
 	
-	<br>
+ 
 <p align="center">
   <img src="scrsht.jpg" width="350"/>
 </p>
