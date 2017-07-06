@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>MicroMonitor2</title>
+<style> </style>
+
+<script>
+
+	var interval = 300; // seconds
+
+	var sys = [
+			{name:"CNN",url:"http://edition.cnn.com/"},
+			{name:"BBC",url:"http://www.bbc.com/"},
+			{name:"NYT",url:"https://www.nytimes.com/"},
+			{name:"Google",url:"https://news.google.com"},
+			{name:"Microsoft",url:"https://news.microsoft.com"},
+			{name:"RBC",url:"http://www.rbc.ru/"},
+			{name:"Lenta",url:"https://lenta.ru"}
+	 ];
+	 
+	var warr=[]; // windows array
+	var ival = 0; // interval handler
+	 
+function Init(){
+
+	CreateWindow();
+	ival = window.setInterval(UpdateWindow, interval * 1000);
+ 
+}
+
+function CreateWindow(){
+	
+	var l = sys.length;
+	var cols = Math.floor( Math.sqrt (l) ) + 1;
+	var wwidth = Math.round( screen.availWidth / cols  );
+	var wheight = Math.round( screen.availHeight  / ( cols - 1 ) );
+	var wleft = 0;
+	var wtop = 0;
+	var row = 0;
+	var col = 0;
+	
+	console.log("cols" + cols);
+	
+  for (var i=0;i<l;++i)
+	{
+	
+	console.log(">>" + sys[i].url);
+ 
+ 		if ( sys[i].url == "" ) { continue; }
+		
+		wleft = wwidth * col ;
+		wtop = wheight * row ;
+		
+		var spec = "width="+wwidth+", height="+wheight+", left="+wleft+", top="+wtop;
+		
+		console.log(">>" + spec );
+		
+		warr[i] = window.open(sys[i].url, sys[i].name, spec );
+		
+		if ( col * wwidth >= screen.availWidth - wwidth ) { col = 0; ++row; } else { ++col; } 
+		
+	}
+
+}
+
+function UpdateWindow(){
+
+	CloseWindow();
+	CreateWindow();
+
+}
+
+function StopWindow(){ 
+	window.clearInterval(ival);
+}
+
+function CloseWindow(){
+
+	for(var i=0,l=warr.length;i<l;++i){
+	
+		warr[i].close(warr[i]);
+		
+	}
+
+}
+
+</script>
+
+</head>
+
+<body onload=Init()>
+Controller window.<br> Do not close.<br>
+<input type=button onclick=CloseWindow() value="Close all my windows">
+<input type=button onclick=StopWindow() value="Stop updating">
+</body>
+</html>
